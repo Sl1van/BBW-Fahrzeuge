@@ -9,15 +9,16 @@ public class Garage {
         this.areaSize = size;
     }
 
-    public void addVehicle(MotorVehicle vehicle) {
-        if (getAreaAvailable() >=vehicle.getSize()) {
+    public boolean addVehicle(MotorVehicle vehicle) {
+        if (getAreaAvailable() >= vehicle.getSize()) {
             motorVehicles.add(vehicle);
-        } else {
-            System.out.println("This vehicle is too big for the garage");
+            return true;
         }
+        System.out.println("This vehicle is too big for the garage");
+        return false;
     }
 
-    public int getAreaSize(){
+    public int getAreaSize() {
         return areaSize;
     }
 
@@ -25,11 +26,11 @@ public class Garage {
         this.areaSize = areaSize;
     }
 
-    public int getAreaAvailable(){
+    public int getAreaAvailable() {
         return areaSize - motorVehicles.stream().mapToInt(MotorVehicle::getSize).sum();
     }
 
-    public int getAreaUsed(){
+    public int getAreaUsed() {
         return motorVehicles.stream().mapToInt(MotorVehicle::getSize).sum();
     }
 

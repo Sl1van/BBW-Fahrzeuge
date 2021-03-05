@@ -34,4 +34,17 @@ public class GarageTest {
         garage.addVehicle(new Car(null,0,0,0,null,100,0));
         assertEquals(100,garage.getAreaUsed());
     }
+    @Test
+    void addehicleWhenThereIsEnoughSpace(){
+        Garage garage = new Garage(100);
+        assertTrue(garage.addVehicle(new Car(null,0,0,0,null,100,0)));
+    }
+
+    @Test
+    void addehicleWhenThereIsNotEnoughSpace(){
+        Garage garage = new Garage(100);
+        garage.addVehicle(new Car(null,0,0,0,null,100,0));
+        assertFalse(garage.addVehicle(new Car(null,0,0,0,null,100,0)));
+    }
+
 }
