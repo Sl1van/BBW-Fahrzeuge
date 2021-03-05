@@ -3,28 +3,34 @@ import java.util.List;
 
 public class Garage {
     List<MotorVehicle> motorVehicles = new ArrayList<>();
-    private int size;
+    private int areaSize;
 
     public Garage(int size) {
-        this.size = size;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
+        this.areaSize = size;
     }
 
     public void addVehicle(MotorVehicle vehicle) {
-        int currentSizeUsed = motorVehicles.stream().mapToInt(MotorVehicle::getSize).sum();
-
-        if (currentSizeUsed + vehicle.getSize() < size) {
+        if (getAreaAvailable() >=vehicle.getSize()) {
             motorVehicles.add(vehicle);
         } else {
             System.out.println("This vehicle is too big for the garage");
         }
+    }
+
+    public int getAreaSize(){
+        return areaSize;
+    }
+
+    public void setAreaSize(int areaSize) {
+        this.areaSize = areaSize;
+    }
+
+    public int getAreaAvailable(){
+        return areaSize - motorVehicles.stream().mapToInt(MotorVehicle::getSize).sum();
+    }
+
+    public int getAreaUsed(){
+        return motorVehicles.stream().mapToInt(MotorVehicle::getSize).sum();
     }
 
     public void printVehicles() {
